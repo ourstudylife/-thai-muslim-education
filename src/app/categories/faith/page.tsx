@@ -81,7 +81,7 @@ export default async function FaithPage() {
                                             />
 
                                             <Button asChild className="w-full sm:w-auto" variant="outline">
-                                                <Link href={`/ categories / faith / lessons / ${lesson.slug} `}>
+                                                <Link href={`/categories/faith/lessons/${lesson.slug}`}>
                                                     เริ่มเรียนรู้
                                                 </Link>
                                             </Button>
