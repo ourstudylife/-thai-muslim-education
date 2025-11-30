@@ -13,7 +13,7 @@ export default function CategoriesPage() {
             icon: "heart",
             color: "from-blue-500 to-blue-600",
             iconBg: "bg-blue-100 text-blue-600",
-            imageUrl: "/faith-bg.png",
+            imageUrl: "/faith-card-bg.png",
             topics: [
                 "รูกนุลอีมาน (เสาหลักของศรัทธา)",
                 "ตัวหีด (ความเชื่อในพระเจ้าองค์เดียว)",
@@ -31,7 +31,7 @@ export default function CategoriesPage() {
             icon: "building",
             color: "from-green-500 to-green-600",
             iconBg: "bg-green-100 text-green-600",
-            imageUrl: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?q=80&w=1000&auto=format&fit=crop",
+            imageUrl: "/practice-card-bg.png",
             topics: [
                 "รูกนุลอิสลาม (เสาหลักของอิสลาม)",
                 "ศอลาต (การละหมาด)",
@@ -128,7 +128,7 @@ export default function CategoriesPage() {
                                     asChild
                                     className="w-full group-hover:shadow-lg transition-shadow"
                                 >
-                                    <Link href={category.href}>
+                                    <Link href={category.href} className="flex items-center justify-center">
                                         เรียนรู้เพิ่มเติม
                                         <svg className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
