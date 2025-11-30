@@ -13,7 +13,7 @@ export default function CategoriesPage() {
             icon: "heart",
             color: "from-blue-500 to-blue-600",
             iconBg: "bg-blue-100 text-blue-600",
-            imageUrl: "/faith-card-bg.png",
+            imageUrl: "/faith-card-bg.png?v=1",
             topics: [
                 "รูกนุลอีมาน (เสาหลักของศรัทธา)",
                 "ตัวหีด (ความเชื่อในพระเจ้าองค์เดียว)",
@@ -31,7 +31,7 @@ export default function CategoriesPage() {
             icon: "building",
             color: "from-green-500 to-green-600",
             iconBg: "bg-green-100 text-green-600",
-            imageUrl: "/practice-card-bg.png",
+            imageUrl: "/practice-card-bg.png?v=1",
             topics: [
                 "รูกนุลอิสลาม (เสาหลักของอิสลาม)",
                 "ศอลาต (การละหมาด)",
