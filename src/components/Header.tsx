@@ -24,6 +24,7 @@ export function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <Link href="https://thaimuslimeducation.com/" className="transition-colors hover:text-primary">หน้าหลัก</Link>
                     <Link href="/" className="transition-colors hover:text-primary">หน้าแรก</Link>
                     <Link href="/blog" className="transition-colors hover:text-primary">บทความ</Link>
                     <Link href="/categories" className="transition-colors hover:text-primary">หมวดหมู่</Link>
@@ -51,6 +52,7 @@ export function Header() {
             {isMenuOpen && (
                 <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b shadow-lg p-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
                     <nav className="flex flex-col gap-4 text-sm font-medium">
+                        <Link href="https://thaimuslimeducation.com/" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</Link>
                         <Link href="/" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>หน้าแรก</Link>
                         <Link href="/blog" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>บทความ</Link>
                         <Link href="/categories" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>หมวดหมู่</Link>
