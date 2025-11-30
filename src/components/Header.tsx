@@ -7,6 +7,8 @@ import { Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+import GoogleTranslate from "@/components/GoogleTranslate"
+
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
@@ -34,6 +36,9 @@ export function Header() {
 
                 {/* Actions */}
                 <div className="flex items-center gap-2">
+                    <div className="hidden md:block">
+                        <GoogleTranslate />
+                    </div>
                     <Button variant="ghost" size="icon" aria-label="ค้นหา">
                         <Search className="h-5 w-5" />
                     </Button>
@@ -59,7 +64,10 @@ export function Header() {
                         <Link href="/about" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>เกี่ยวกับเรา</Link>
                         <Link href="/contact" className="p-2 hover:bg-muted rounded-md" onClick={() => setIsMenuOpen(false)}>ติดต่อ</Link>
                     </nav>
-                    <div className="pt-4 border-t">
+                    <div className="pt-4 border-t space-y-4">
+                        <div className="flex justify-center">
+                            <GoogleTranslate />
+                        </div>
                         <Button className="w-full" asChild>
                             <Link href="/donate" onClick={() => setIsMenuOpen(false)}>บริจาค</Link>
                         </Button>
