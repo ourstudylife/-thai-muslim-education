@@ -18,7 +18,7 @@ export default function GoogleTranslate() {
             new (window as any).google.translate.TranslateElement(
                 {
                     pageLanguage: "th",
-                    includedLanguages: "th,en,ar,ms,tr,zh-CN", // Limited languages
+                    includedLanguages: "th,en,ar,ms,tr,zh-CN",
                     layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
                     autoDisplay: false,
                 },
@@ -44,8 +44,11 @@ export default function GoogleTranslate() {
 
     return (
         <div className="flex items-center gap-2">
-            {/* Hidden Google Translate Element */}
-            <div id="google_translate_element" className="hidden" />
+            {/* Hidden Google Translate Element - Use absolute positioning instead of display:none to ensure it renders */}
+            <div
+                id="google_translate_element"
+                className="absolute opacity-0 w-0 h-0 overflow-hidden pointer-events-none"
+            />
 
             {/* Custom UI */}
             <div className="relative flex items-center bg-background border rounded-full px-3 py-1.5 hover:bg-muted/50 transition-colors shadow-sm">
