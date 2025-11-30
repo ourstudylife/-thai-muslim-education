@@ -7,23 +7,30 @@ export default function GoogleTranslate() {
     const [isScriptLoaded, setIsScriptLoaded] = useState(false)
 
     useEffect(() => {
+        const initGoogleTranslate = () => {
+            if ((window as any).google && (window as any).google.translate) {
+                new (window as any).google.translate.TranslateElement(
+                    {
+                        pageLanguage: "th",
+                        includedLanguages: "th,en,ar,ms,tr,zh-CN",
+                        layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
+                        autoDisplay: false,
+                    },
+                    "google_translate_element"
+                )
+            }
+        }
+
+            // Define the callback function globally
+            ; (window as any).googleTranslateElementInit = initGoogleTranslate
+
         // Check if script is already added
         if (document.querySelector('script[src*="translate.google.com"]')) {
             setIsScriptLoaded(true)
+            // If script is loaded, manually trigger init because onload won't fire again
+            // We use a small timeout to ensure the DOM element is ready
+            setTimeout(initGoogleTranslate, 100)
             return
-        }
-
-        // Define the callback function globally
-        ; (window as any).googleTranslateElementInit = () => {
-            new (window as any).google.translate.TranslateElement(
-                {
-                    pageLanguage: "th",
-                    includedLanguages: "th,en,ar,ms,tr,zh-CN",
-                    layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false,
-                },
-                "google_translate_element"
-            )
         }
 
         // Create and append the script
