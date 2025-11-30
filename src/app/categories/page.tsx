@@ -58,7 +58,7 @@ export default function CategoriesPage() {
         <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
             {/* Hero Section */}
             <section className="relative py-16 md:py-24 bg-gradient-to-r from-primary to-primary/80 text-white">
-                <div className="absolute inset-0 bg-[url('https://unsplash.com/photos/brown-concrete-building-during-daytime-FLFjAn3gQI8')] bg-cover bg-center opacity-10" />
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1528123981681-b516d9629971?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10" />
                 <div className="relative container mx-auto px-4 text-center">
                     <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
                         <BookMarked className="h-5 w-5" />
