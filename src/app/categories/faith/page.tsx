@@ -59,10 +59,10 @@ export default async function FaithPage() {
                                     <div
                                         key={lesson.slug}
                                         className="relative pl-20 group animate-in fade-in slide-in-from-left-8 duration-500"
-                                        style={{ animationDelay: `${index * 100} ms` }}
+                                        style={{ animationDelay: `${index * 100}ms` }}
                                     >
                                         {/* Timeline Dot */}
-                                        <div className={`absolute left - 0 w - 16 h - 16 rounded - full ${colors[index % colors.length]} flex items - center justify - center shadow - lg transform group - hover: scale - 110 transition - transform duration - 300`}>
+                                        <div className={`absolute left-0 w-16 h-16 rounded-full ${colors[index % colors.length]} flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
                                             <span className="text-white font-bold text-xl">{index + 1}</span>
                                         </div>
 
