@@ -4,9 +4,10 @@ import { useEffect, useState } from "react"
 import { Globe } from "lucide-react"
 
 export default function GoogleTranslate() {
-    const [isScriptLoaded, setIsScriptLoaded] = useState(false)
+    const [selectedLang, setSelectedLang] = useState("")
 
     useEffect(() => {
+        // Initialize Google Translate script
         const initGoogleTranslate = () => {
             if ((window as any).google && (window as any).google.translate) {
                 new (window as any).google.translate.TranslateElement(
@@ -21,32 +22,34 @@ export default function GoogleTranslate() {
             }
         }
 
-            // Define the callback function globally
             ; (window as any).googleTranslateElementInit = initGoogleTranslate
 
-        // Check if script is already added
         if (document.querySelector('script[src*="translate.google.com"]')) {
-            setIsScriptLoaded(true)
-            // If script is loaded, manually trigger init because onload won't fire again
-            // We use a small timeout to ensure the DOM element is ready
             setTimeout(initGoogleTranslate, 100)
-            return
+        } else {
+            const script = document.createElement("script")
+            script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+            script.async = true
+            document.body.appendChild(script)
         }
 
-        // Create and append the script
-        const script = document.createElement("script")
-        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-        script.async = true
-        script.onload = () => setIsScriptLoaded(true)
-        document.body.appendChild(script)
+        // Read current language from cookie
+        const match = document.cookie.match(new RegExp('(^| )googtrans=([^;]+)'))
+        if (match) {
+            const lang = match[2].split('/')[2]
+            setSelectedLang(lang)
+        }
     }, [])
 
     const handleLanguageChange = (langCode: string) => {
-        const select = document.querySelector(".goog-te-combo") as HTMLSelectElement
-        if (select) {
-            select.value = langCode
-            select.dispatchEvent(new Event("change"))
-        }
+        // Set cookie for Google Translate
+        // Format: /source/target (e.g., /auto/en)
+        const domain = window.location.hostname
+        document.cookie = `googtrans=/auto/${langCode}; path=/; domain=${domain}`
+        document.cookie = `googtrans=/auto/${langCode}; path=/;` // Fallback
+
+        setSelectedLang(langCode)
+        window.location.reload() // Reload to apply translation
     }
 
     return (
@@ -61,9 +64,9 @@ export default function GoogleTranslate() {
             <div className="relative flex items-center bg-background border rounded-full px-3 py-1.5 hover:bg-muted/50 transition-colors shadow-sm">
                 <Globe className="h-4 w-4 mr-2 text-muted-foreground" />
                 <select
+                    value={selectedLang}
                     onChange={(e) => handleLanguageChange(e.target.value)}
                     className="bg-transparent border-none outline-none text-sm font-medium appearance-none cursor-pointer pr-2 text-foreground"
-                    defaultValue=""
                 >
                     <option value="" disabled>เลือกภาษา</option>
                     <option value="th">🇹🇭 ไทย</option>
