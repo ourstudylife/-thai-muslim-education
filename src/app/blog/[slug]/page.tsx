@@ -1,19 +1,94 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { Calendar, Clock, User, Share2, Facebook, Twitter, Link as LinkIcon, Printer } from "lucide-react"
+import { Calendar, Clock, User, Facebook, Twitter, Link as LinkIcon, Printer, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CategoryBadge } from "@/components/CategoryBadge"
 import { TableOfContents } from "@/components/TableOfContents"
-import { getPostBySlug, getRelatedPosts } from "@/lib/api"
-import { notFound } from "next/navigation"
+import { useState, useEffect } from "react"
 
-export default async function SinglePost({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params
-    const post = await getPostBySlug(slug)
-    const relatedPosts = post ? await getRelatedPosts(post.categories.nodes[0]?.slug || "general", slug) : []
+interface Post {
+    title: string
+    slug: string
+    content: string
+    date: string
+    author?: { node?: { name?: string } }
+    categories: { nodes: Array<{ name?: string; slug?: string }> }
+    featuredImage?: { node?: { sourceUrl?: string } }
+}
+
+interface RelatedPost {
+    slug: string
+    title: string
+    date: string
+    featuredImage?: { node?: { sourceUrl?: string } }
+}
+
+export default function SinglePost({ params }: { params: Promise<{ slug: string }> }) {
+    const [post, setPost] = useState<Post | null>(null)
+    const [relatedPosts, setRelatedPosts] = useState<RelatedPost[]>([])
+    const [loading, setLoading] = useState(true)
+    const [copied, setCopied] = useState(false)
+    const [currentUrl, setCurrentUrl] = useState("")
+
+    useEffect(() => {
+        setCurrentUrl(window.location.href)
+
+        async function loadData() {
+            const { slug } = await params
+            const { getPostBySlug, getRelatedPosts } = await import("@/lib/api")
+            const postData = await getPostBySlug(slug)
+
+            if (postData) {
+                setPost(postData)
+                const related = await getRelatedPosts(postData.categories.nodes[0]?.slug || "general", slug)
+                setRelatedPosts(related)
+            }
+            setLoading(false)
+        }
+        loadData()
+    }, [params])
+
+    const handleShare = (platform: string) => {
+        const url = encodeURIComponent(currentUrl)
+        const title = encodeURIComponent(post?.title || "")
+
+        if (platform === "facebook") {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank", "width=600,height=400")
+        } else if (platform === "twitter") {
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, "_blank", "width=600,height=400")
+        }
+    }
+
+    const handleCopyLink = async () => {
+        try {
+            await navigator.clipboard.writeText(currentUrl)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+        } catch (err) {
+            console.error("Failed to copy:", err)
+        }
+    }
+
+    const handlePrint = () => {
+        window.print()
+    }
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            </div>
+        )
+    }
 
     if (!post) {
-        notFound()
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <p>ไม่พบบทความ</p>
+            </div>
+        )
     }
 
     return (
@@ -86,10 +161,38 @@ export default async function SinglePost({ params }: { params: Promise<{ slug: s
                             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                                 <div className="flex items-center gap-2">
                                     <span className="font-bold text-sm">แชร์บทความ:</span>
-                                    <Button variant="outline" size="icon" className="rounded-full hover:text-[#1877F2] hover:border-[#1877F2]"><Facebook className="h-4 w-4" /></Button>
-                                    <Button variant="outline" size="icon" className="rounded-full hover:text-[#1DA1F2] hover:border-[#1DA1F2]"><Twitter className="h-4 w-4" /></Button>
-                                    <Button variant="outline" size="icon" className="rounded-full"><LinkIcon className="h-4 w-4" /></Button>
-                                    <Button variant="outline" size="icon" className="rounded-full"><Printer className="h-4 w-4" /></Button>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="rounded-full hover:text-[#1877F2] hover:border-[#1877F2]"
+                                        onClick={() => handleShare("facebook")}
+                                    >
+                                        <Facebook className="h-4 w-4" />
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="rounded-full hover:text-[#1DA1F2] hover:border-[#1DA1F2]"
+                                        onClick={() => handleShare("twitter")}
+                                    >
+                                        <Twitter className="h-4 w-4" />
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className={`rounded-full ${copied ? "text-green-500 border-green-500" : ""}`}
+                                        onClick={handleCopyLink}
+                                    >
+                                        {copied ? <Check className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="rounded-full"
+                                        onClick={handlePrint}
+                                    >
+                                        <Printer className="h-4 w-4" />
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +211,7 @@ export default async function SinglePost({ params }: { params: Promise<{ slug: s
                                 <h3 className="font-serif text-lg font-bold mb-4">บทความที่เกี่ยวข้อง</h3>
                                 <div className="space-y-4">
                                     {relatedPosts.length > 0 ? (
-                                        relatedPosts.map((relatedPost: any) => (
+                                        relatedPosts.map((relatedPost: RelatedPost) => (
                                             <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group flex gap-3 items-start">
                                                 <div className="relative w-20 h-14 rounded-md overflow-hidden bg-muted flex-shrink-0">
                                                     <Image
@@ -138,20 +241,21 @@ export default async function SinglePost({ params }: { params: Promise<{ slug: s
                 </div>
             </div>
             {/* Sticky Share Bar for Mobile */}
-            <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4 flex justify-around items-center md:hidden z-40">
-                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs">
+            <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4 flex justify-around items-center md:hidden z-40 print:hidden">
+                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs" onClick={() => handleShare("facebook")}>
                     <Facebook className="h-5 w-5" />
                     <span>แชร์</span>
                 </Button>
-                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs">
+                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs" onClick={() => handleShare("twitter")}>
                     <Twitter className="h-5 w-5" />
                     <span>ทวีต</span>
                 </Button>
-                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs">
-                    <LinkIcon className="h-5 w-5" />
-                    <span>คัดลอก</span>
+                <Button variant="ghost" size="sm" className="flex-col gap-1 h-auto py-2 text-xs" onClick={handleCopyLink}>
+                    {copied ? <Check className="h-5 w-5 text-green-500" /> : <LinkIcon className="h-5 w-5" />}
+                    <span>{copied ? "คัดลอกแล้ว" : "คัดลอก"}</span>
                 </Button>
             </div>
         </article>
     )
 }
+
