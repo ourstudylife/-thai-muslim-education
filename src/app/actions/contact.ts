@@ -1,6 +1,8 @@
 "use server"
 
 import nodemailer from "nodemailer"
+import { GoogleSpreadsheet } from "google-spreadsheet"
+import { JWT } from "google-auth-library"
 
 export async function submitContactForm(formData: any) {
     const { name, email, phone, whatsapp, lineId, preferredMethod, message } = formData
@@ -12,30 +14,80 @@ export async function submitContactForm(formData: any) {
 
     console.log("Contact Form Data Received:", formData)
 
+    const results = {
+        email: { success: false, error: null as any },
+        sheet: { success: false, error: null as any }
+    }
+
+    // --- TASK 1: SAVE TO GOOGLE SHEETS ---
     try {
-        // 2. Check for environment variables
+        if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_SHEET_ID) {
+            const SCOPES = [
+                'https://www.googleapis.com/auth/spreadsheets',
+                'https://www.googleapis.com/auth/drive.file',
+            ];
+
+            const jwt = new JWT({
+                email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+                key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+                scopes: SCOPES,
+            });
+
+            const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, jwt);
+
+            await doc.loadInfo();
+            const sheet = doc.sheetsByIndex[0]; // Use the first sheet
+
+            await sheet.addRow({
+                Date: new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }),
+                Name: name,
+                Email: email,
+                Phone: phone,
+                WhatsApp: whatsapp || "-",
+                LineID: lineId || "-",
+                PreferredContact: preferredMethod,
+                Message: message
+            });
+            console.log("✅ Saved to Google Sheets")
+            results.sheet.success = true;
+        } else {
+            console.warn("⚠️ Google Sheets credentials missing. Skipping save.")
+            results.sheet.error = "Credentials missing";
+        }
+    } catch (error) {
+        console.error("❌ Google Sheets Error:", error)
+        results.sheet.error = error;
+        // Don't throw, we still want to try sending email
+    }
+
+    // --- TASK 2: SEND EMAIL ---
+    try {
+        // Check for environment variables
         if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-            console.warn("⚠️ Email credentials not found in environment variables (EMAIL_USER, EMAIL_PASS).")
-            console.warn("Skipping email send. Data was:", formData)
-            // Return success to simulate behavior for the user if they haven't set up keys yet
-            // But usually we might want to throw an error. For this request, I'll simulate success so the UI updates.
+            console.warn("⚠️ Email credentials not found in environment variables.")
+            results.email.error = "Credentials missing";
+            // Check if we saved to sheet at least?
+            if (results.sheet.success) {
+                return { success: true, message: "Saved to Sheet, but Email failed (config missing)." }
+            }
+            // Return success to simulate behavior if only testing UI
             return { success: true, message: "Simulation: Email config missing" }
         }
 
-        // 3. Create Transporter
+        // Create Transporter
         const transporter = nodemailer.createTransport({
-            service: "gmail", // Or use 'smtp.gmail.com'
+            service: "gmail",
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS, // App Password, not Gmail password
+                pass: process.env.EMAIL_PASS,
             },
         })
 
-        // 4. Send Email
+        // Send Email
         await transporter.sendMail({
             from: `"Thai Muslim Education Website" <${process.env.EMAIL_USER}>`,
-            to: process.env.EMAIL_USER, // Check this: Send TO yourself (the admin)
-            replyTo: email, // Allow replying to the user
+            to: process.env.EMAIL_USER,
+            replyTo: email,
             subject: `New Contact Message from ${name}`,
             html: `
                 <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
@@ -77,9 +129,14 @@ export async function submitContactForm(formData: any) {
             `,
         })
 
+        console.log("✅ Email sent successfully")
+        results.email.success = true;
+
         return { success: true }
     } catch (error) {
         console.error("Email send error:", error)
+        // If sheet saved but email failed, we might still consider it partial success?
+        // But for user feedback, usually email is critical.
         return { success: false, error: "เกิดข้อผิดพลาดในการส่งอีเมล กรุณาลองใหม่อีกครั้ง" }
     }
 }
