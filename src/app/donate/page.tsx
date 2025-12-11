@@ -1,6 +1,5 @@
-import { Heart, CreditCard, QrCode, CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import { Heart, CheckCircle2, ExternalLink } from "lucide-react"
+import Link from "next/link"
 
 export default function DonatePage() {
     return (
@@ -24,54 +23,53 @@ export default function DonatePage() {
             <div className="container mx-auto px-4 py-16">
                 <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
 
-                    {/* Donation Methods */}
+                    {/* Donation Button Section */}
                     <div className="space-y-8">
                         <div className="bg-card border rounded-2xl p-8 shadow-sm">
                             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                <CreditCard className="w-6 h-6 text-emerald-600" />
-                                โอนเงินผ่านบัญชีธนาคาร
+                                <Heart className="w-6 h-6 text-emerald-600" />
+                                ร่วมสนับสนุนเรา
                             </h2>
 
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl border">
-                                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-                                        {/* Bank Icon Placeholder */}
-                                        <span className="font-bold text-emerald-700 text-xs">KBANK</span>
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-muted-foreground">ธนาคารกสิกรไทย</p>
-                                        <p className="text-xl font-mono font-bold text-emerald-700">XXX-X-XXXXX-X</p>
-                                        <p className="text-sm font-medium">ชื่อบัญชี: XXX-X-XXXXX-X</p>
-                                    </div>
-                                </div>
+                            <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                                <p className="text-lg text-emerald-800 mb-6 text-center leading-relaxed">
+                                    คลิกปุ่มด้านล่างเพื่อร่วมบริจาคสนับสนุนการเผยแพร่ความรู้ศาสนาอิสลาม
+                                </p>
 
-                                <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl border">
-                                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-                                        {/* Bank Icon Placeholder */}
-                                        <span className="font-bold text-blue-700 text-xs">BBL</span>
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-muted-foreground">ธนาคารกรุงเทพ</p>
-                                        <p className="text-xl font-mono font-bold text-blue-700">XXX-X-XXXXX-X</p>
-                                        <p className="text-sm font-medium">ชื่อบัญชี: XXX-X-XXXXX-X</p>
-                                    </div>
-                                </div>
+                                <Link
+                                    href="https://thaimuslimeducation.com/donation/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden"
+                                >
+                                    {/* Animated background effect */}
+                                    <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
+                                    {/* Shimmer effect */}
+                                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
+
+                                    <Heart className="w-6 h-6 relative z-10 group-hover:animate-pulse" />
+                                    <span className="relative z-10">บริจาคตอนนี้</span>
+                                    <ExternalLink className="w-5 h-5 relative z-10 opacity-70" />
+                                </Link>
+
+                                <p className="text-sm text-muted-foreground mt-4 text-center">
+                                    ระบบบริจาครองรับทุกช่องทางการชำระเงิน
+                                </p>
                             </div>
                         </div>
 
-                        <div className="bg-card border rounded-2xl p-8 shadow-sm">
-                            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                <QrCode className="w-6 h-6 text-emerald-600" />
-                                สแกน QR Code
-                            </h2>
-                            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-dashed border-emerald-200">
-                                <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                                    <QrCode className="w-16 h-16 text-gray-400" />
-                                </div>
-                                <p className="text-sm text-muted-foreground text-center">
-                                    รองรับทุกธนาคาร และ PromptPay
-                                </p>
+                        {/* Additional encouragement card */}
+                        <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 shadow-sm">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="text-2xl">🤲</span>
+                                <h3 className="text-lg font-bold text-amber-900">ดุอาอ์สำหรับผู้บริจาค</h3>
                             </div>
+                            <p className="text-amber-800 text-sm leading-relaxed italic">
+                                "اللَّهُمَّ اجْعَلْ الْقُرْآنَ رَبِيعَ قَلْبِي"
+                                <br />
+                                ขออัลลอฮ์ทรงให้อัลกุรอานเป็นความสดชื่นในหัวใจของฉัน
+                            </p>
                         </div>
                     </div>
 
