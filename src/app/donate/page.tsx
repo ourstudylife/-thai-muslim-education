@@ -12,7 +12,7 @@ export default function DonatePage() {
                         <Heart className="w-6 h-6 text-emerald-300" />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
-                        ร่วมบริจาคสนับสนุน
+                        ร่วมสมทบทุนสนับสนุน
                     </h1>
                     <p className="text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed">
                         "การบริจาคทาน (ศอดะเกาะห์) ไม่ได้ทำให้ทรัพย์สินพร่องลง แต่กลับจะเพิ่มพูนความจำเริญ"
@@ -33,7 +33,7 @@ export default function DonatePage() {
 
                             <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
                                 <p className="text-lg text-emerald-800 mb-6 text-center leading-relaxed">
-                                    คลิกปุ่มด้านล่างเพื่อร่วมบริจาคสนับสนุนการเผยแพร่ความรู้ศาสนาอิสลาม
+                                    คลิกปุ่มด้านล่างเพื่อร่วมสนับสนุนการเผยแพร่ความรู้ศาสนาอิสลาม
                                 </p>
 
                                 <Link
@@ -49,12 +49,12 @@ export default function DonatePage() {
                                     <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
 
                                     <Heart className="w-6 h-6 relative z-10 group-hover:animate-pulse" />
-                                    <span className="relative z-10">บริจาคตอนนี้</span>
+                                    <span className="relative z-10">ร่วมสนับสนุนตอนนี้</span>
                                     <ExternalLink className="w-5 h-5 relative z-10 opacity-70" />
                                 </Link>
 
                                 <p className="text-sm text-muted-foreground mt-4 text-center">
-                                    ระบบบริจาครองรับทุกช่องทางการชำระเงิน
+                                    รองรับทุกช่องทางการชำระเงิน
                                 </p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export default function DonatePage() {
                         <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 shadow-sm">
                             <div className="flex items-center gap-3 mb-3">
                                 <span className="text-2xl">🤲</span>
-                                <h3 className="text-lg font-bold text-amber-900">ดุอาอ์สำหรับผู้บริจาค</h3>
+                                <h3 className="text-lg font-bold text-amber-900">ดุอาอ์สำหรับผู้สนับสนุน</h3>
                             </div>
                             <p className="text-amber-800 text-sm leading-relaxed italic">
                                 "اللَّهُمَّ اجْعَلْ الْقُرْآنَ رَبِيعَ قَلْبِي"
@@ -77,7 +77,7 @@ export default function DonatePage() {
                     <div className="space-y-8">
                         <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
                             <h3 className="text-xl font-bold text-emerald-900 mb-4">
-                                เงินบริจาคของท่านจะถูกนำไปใช้เพื่อ:
+                                เงินสนับสนุนของท่านจะถูกนำไปใช้เพื่อ:
                             </h3>
                             <ul className="space-y-4">
                                 {[
@@ -95,7 +95,7 @@ export default function DonatePage() {
                         </div>
 
                         <div className="prose prose-emerald">
-                            <h3>ทำไมต้องบริจาค?</h3>
+                            <h3>ทำไมต้องร่วมสนับสนุน?</h3>
                             <p>
                                 การสนับสนุนของท่านช่วยให้เราสามารถดำเนินงานเผยแพร่ความรู้ศาสนาอิสลามต่อไปได้อย่างยั่งยืน ทุกบาททุกสตางค์ของท่านมีส่วนช่วยสร้างสังคมแห่งการเรียนรู้
                             </p>
