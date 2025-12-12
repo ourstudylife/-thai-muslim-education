@@ -95,7 +95,7 @@ export default function AboutPage() {
                         href="/donate"
                         className="inline-block bg-white text-emerald-700 px-8 py-3 rounded-full font-bold hover:bg-emerald-50 transition-colors"
                     >
-                        บริจาคสนับสนุน
+                        ร่วมสนับสนุน
                     </a>
                 </div>
             </div>

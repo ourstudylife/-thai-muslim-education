@@ -43,7 +43,7 @@ export function Header() {
                         <Search className="h-5 w-5" />
                     </Button>
                     <Button className="hidden md:inline-flex" asChild>
-                        <Link href="/donate">บริจาค</Link>
+                        <Link href="/donate">สนับสนุน</Link>
                     </Button>
 
                     {/* Mobile Menu Toggle */}
@@ -69,7 +69,7 @@ export function Header() {
                             <GoogleTranslate />
                         </div>
                         <Button className="w-full" asChild>
-                            <Link href="/donate" onClick={() => setIsMenuOpen(false)}>บริจาค</Link>
+                            <Link href="/donate" onClick={() => setIsMenuOpen(false)}>สนับสนุน</Link>
                         </Button>
                     </div>
                 </div>
