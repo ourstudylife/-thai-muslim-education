@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "thaimuslimeducation.com",
       },
+      {
+        protocol: "https",
+        hostname: "en.thaimuslimeducation.com",
+      },
     ],
   },
 };

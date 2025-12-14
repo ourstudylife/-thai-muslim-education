@@ -12,6 +12,8 @@ interface PostCardProps {
     imageUrl: string
     slug: string
     className?: string
+    basePath?: string
+    readMoreText?: string
 }
 
 export function PostCard({
@@ -22,12 +24,16 @@ export function PostCard({
     category,
     imageUrl,
     slug,
-    className
+    className,
+    basePath = "/blog",
+    readMoreText = "อ่านต่อ"
 }: PostCardProps) {
+    const postUrl = `${basePath}/${slug}`;
+
     return (
         <article className={cn("group flex flex-col bg-card rounded-lg overflow-hidden border shadow-sm hover:shadow-md transition-shadow", className)}>
             {/* Image */}
-            <Link href={`/blog/${slug}`} className="relative aspect-[16/9] overflow-hidden bg-muted">
+            <Link href={postUrl} className="relative aspect-[16/9] overflow-hidden bg-muted">
                 <Image
                     src={imageUrl}
                     alt={title}
@@ -55,7 +61,7 @@ export function PostCard({
                 </div>
 
                 <h3 className="font-serif text-xl font-bold leading-tight mb-2 group-hover:text-primary transition-colors">
-                    <Link href={`/blog/${slug}`}>
+                    <Link href={postUrl}>
                         {title}
                     </Link>
                 </h3>
@@ -65,8 +71,8 @@ export function PostCard({
                 </p>
 
                 <div className="mt-auto pt-4 border-t flex items-center justify-between">
-                    <Link href={`/blog/${slug}`} className="text-sm font-medium text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1">
-                        อ่านต่อ
+                    <Link href={postUrl} className="text-sm font-medium text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1">
+                        {readMoreText}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                     </Link>
                 </div>

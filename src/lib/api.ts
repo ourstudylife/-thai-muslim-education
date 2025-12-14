@@ -1,10 +1,18 @@
 import { GraphQLClient } from 'graphql-request';
 
-const API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL as string;
+const API_URL_TH = process.env.NEXT_PUBLIC_WORDPRESS_API_URL as string;
+const API_URL_EN = process.env.NEXT_PUBLIC_WORDPRESS_API_URL_EN as string || 'https://en.thaimuslimeducation.com/graphql';
 
-export const client = new GraphQLClient(API_URL);
+// Helper to get the correct client based on locale
+function getClient(locale: string = 'th') {
+  const endpoint = locale === 'en' ? API_URL_EN : API_URL_TH;
+  if (!endpoint) {
+    console.warn(`API URL for locale "${locale}" is not defined.`);
+  }
+  return new GraphQLClient(endpoint);
+}
 
-export async function getAllPosts() {
+export async function getAllPosts(locale: string = 'th') {
   const query = `
     query GetAllPosts {
       posts(first: 100, where: { orderby: { field: DATE, order: DESC } }) {
@@ -28,11 +36,11 @@ export async function getAllPosts() {
       }
     }
   `;
-  const data = await client.request(query);
+  const data = await getClient(locale).request(query);
   return (data as any).posts.nodes;
 }
 
-export async function getRecentPosts() {
+export async function getRecentPosts(locale: string = 'th') {
   const query = `
     query GetRecentPosts {
       posts(first: 6, where: { orderby: { field: DATE, order: DESC } }) {
@@ -56,11 +64,11 @@ export async function getRecentPosts() {
       }
     }
   `;
-  const data = await client.request(query);
+  const data = await getClient(locale).request(query);
   return (data as any).posts.nodes;
 }
 
-export async function getPostBySlug(slug: string) {
+export async function getPostBySlug(slug: string, locale: string = 'th') {
   const query = `
     query GetPostBySlug($slug: ID!) {
       post(id: $slug, idType: SLUG) {
@@ -87,11 +95,11 @@ export async function getPostBySlug(slug: string) {
       }
     }
   `;
-  const data = await client.request(query, { slug });
+  const data = await getClient(locale).request(query, { slug });
   return (data as any).post;
 }
 
-export async function getCategories() {
+export async function getCategories(locale: string = 'th') {
   const query = `
     query GetCategories {
       categories(first: 10) {
@@ -103,11 +111,11 @@ export async function getCategories() {
       }
     }
   `;
-  const data = await client.request(query);
+  const data = await getClient(locale).request(query);
   return (data as any).categories.nodes;
 }
 
-export async function getCategoryBySlug(slug: string) {
+export async function getCategoryBySlug(slug: string, locale: string = 'th') {
   const query = `
     query GetCategoryBySlug($slug: ID!) {
       category(id: $slug, idType: SLUG) {
@@ -118,11 +126,11 @@ export async function getCategoryBySlug(slug: string) {
       }
     }
   `;
-  const data = await client.request(query, { slug });
+  const data = await getClient(locale).request(query, { slug });
   return (data as any).category;
 }
 
-export async function getPostsByCategory(categorySlug: string) {
+export async function getPostsByCategory(categorySlug: string, locale: string = 'th') {
   const query = `
     query GetPostsByCategory($categorySlug: String!) {
       posts(first: 100, where: { categoryName: $categorySlug, orderby: { field: DATE, order: DESC } }) {
@@ -146,11 +154,11 @@ export async function getPostsByCategory(categorySlug: string) {
       }
     }
   `;
-  const data = await client.request(query, { categorySlug });
+  const data = await getClient(locale).request(query, { categorySlug });
   return (data as any).posts.nodes;
 }
 
-export async function searchPosts(searchQuery: string) {
+export async function searchPosts(searchQuery: string, locale: string = 'th') {
   const query = `
     query SearchPosts($searchQuery: String!) {
       posts(first: 50, where: { search: $searchQuery, orderby: { field: DATE, order: DESC } }) {
@@ -174,11 +182,11 @@ export async function searchPosts(searchQuery: string) {
       }
     }
   `;
-  const data = await client.request(query, { searchQuery });
+  const data = await getClient(locale).request(query, { searchQuery });
   return (data as any).posts.nodes;
 }
 
-export async function getLessonsByCategory(categorySlug: string) {
+export async function getLessonsByCategory(categorySlug: string, locale: string = 'th') {
   const query = `
     query GetLessonsByCategory($categorySlug: String!) {
       posts(first: 100, where: { categoryName: $categorySlug, orderby: { field: DATE, order: ASC } }) {
@@ -203,11 +211,11 @@ export async function getLessonsByCategory(categorySlug: string) {
       }
     }
   `;
-  const data = await client.request(query, { categorySlug });
+  const data = await getClient(locale).request(query, { categorySlug });
   return (data as any).posts.nodes;
 }
 
-export async function getLessonBySlug(slug: string, categorySlug: string) {
+export async function getLessonBySlug(slug: string, categorySlug: string, locale: string = 'th') {
   const query = `
     query GetLessonBySlug($slug: ID!) {
       post(id: $slug, idType: SLUG) {
@@ -235,7 +243,7 @@ export async function getLessonBySlug(slug: string, categorySlug: string) {
       }
     }
   `;
-  const data = await client.request(query, { slug });
+  const data = await getClient(locale).request(query, { slug });
   const post = (data as any).post;
 
   // Verify post belongs to the correct category
@@ -246,7 +254,7 @@ export async function getLessonBySlug(slug: string, categorySlug: string) {
   return null;
 }
 
-export async function getRelatedPosts(categorySlug: string, currentSlug: string) {
+export async function getRelatedPosts(categorySlug: string, currentSlug: string, locale: string = 'th') {
   const query = `
     query GetRelatedPosts($categorySlug: String!) {
       posts(first: 4, where: { categoryName: $categorySlug, orderby: { field: DATE, order: DESC } }) {
@@ -263,7 +271,7 @@ export async function getRelatedPosts(categorySlug: string, currentSlug: string)
       }
     }
   `;
-  const data = await client.request(query, { categorySlug });
+  const data = await getClient(locale).request(query, { categorySlug });
   const posts = (data as any).posts.nodes;
   return posts.filter((post: any) => post.slug !== currentSlug).slice(0, 3);
 }

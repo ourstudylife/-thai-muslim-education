@@ -9,12 +9,18 @@ interface HeroProps {
     title?: string
     description?: string
     backgroundImage?: string
+    searchPlaceholder?: string
+    buttonText?: string
+    buttonLink?: string
 }
 
 export function Hero({
     title = "บทความสอนศาสนา",
     description = "แหล่งรวบรวมความรู้ศาสนาอิสลามที่ถูกต้อง ตามแนวทางอัลกุรอานและซุนนะห์ เพื่อความเข้าใจที่ถูกต้องและการปฏิบัติที่สมบูรณ์",
-    backgroundImage = "/mosque-bg.jpg"
+    backgroundImage = "/mosque-bg.jpg",
+    searchPlaceholder = "ค้นหาบทความ...",
+    buttonText = "อ่านบทความล่าสุด",
+    buttonLink = "/blog"
 }: HeroProps) {
     const router = useRouter()
     const [searchQuery, setSearchQuery] = useState("")
@@ -54,7 +60,7 @@ export function Hero({
                     <form onSubmit={handleSearch} className="relative w-full max-w-md">
                         <input
                             type="text"
-                            placeholder="ค้นหาบทความ..."
+                            placeholder={searchPlaceholder}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full h-12 pl-4 pr-12 rounded-full text-foreground bg-white/95 focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent transition-all"
@@ -70,7 +76,7 @@ export function Hero({
 
                 <div className="mt-8">
                     <Button asChild variant="secondary" size="lg" className="rounded-full font-bold">
-                        <Link href="/blog">อ่านบทความล่าสุด</Link>
+                        <Link href={buttonLink}>{buttonText}</Link>
                     </Button>
                 </div>
             </div>
