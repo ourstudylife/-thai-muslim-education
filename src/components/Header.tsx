@@ -28,7 +28,7 @@ export function Header({ lang = 'th' }: HeaderProps) {
             { name: "ติดต่อ", href: "/contact" },
         ],
         en: [
-            { name: "Main Site", href: "https://thaimuslimeducation.com/" },
+            { name: "Main Site", href: "/eng" },
             { name: "Home", href: "/eng" },
             { name: "Articles", href: "/eng/blog" },
             { name: "Categories", href: "/eng/categories" },
