@@ -40,6 +40,7 @@ export default async function EnglishHome() {
                                 count={cat.count}
                                 variant="outline"
                                 className="px-4 py-2 text-base"
+                                basePath="/eng/categories"
                             // Note: CategoryBadge likely links to `/category/[slug]`. We might need to update CategoryBadge to support lang or handle link inside it.
                             // If CategoryBadge uses <Link href={\`/category/\${slug}\`}>, it will break.
                             // Let's check CategoryBadge later. For now, we assume it's dumb.

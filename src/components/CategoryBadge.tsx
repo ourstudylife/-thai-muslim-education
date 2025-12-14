@@ -7,6 +7,7 @@ interface CategoryBadgeProps {
     count?: number
     className?: string
     variant?: 'default' | 'outline' | 'pill' | 'ghost'
+    basePath?: string
 }
 
 export function CategoryBadge({
@@ -14,7 +15,8 @@ export function CategoryBadge({
     slug,
     count,
     className,
-    variant = 'default'
+    variant = 'default',
+    basePath = '/category'
 }: CategoryBadgeProps) {
     const variants = {
         default: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
@@ -25,7 +27,7 @@ export function CategoryBadge({
 
     return (
         <Link
-            href={`/category/${slug}`}
+            href={`${basePath}/${slug}`}
             className={cn(
                 "inline-flex items-center justify-between gap-2 px-3 py-1 text-sm font-medium transition-colors rounded-md",
                 variants[variant],
