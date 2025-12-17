@@ -36,8 +36,13 @@ export async function getAllPosts(locale: string = 'th') {
       }
     }
   `;
-  const data = await getClient(locale).request(query);
-  return (data as any).posts.nodes;
+  try {
+    const data = await getClient(locale).request(query);
+    return (data as any).posts.nodes;
+  } catch (error) {
+    console.error(`Error fetching all posts (${locale}):`, error);
+    return []; // Return empty array instead of crashing
+  }
 }
 
 export async function getRecentPosts(locale: string = 'th') {
@@ -64,8 +69,13 @@ export async function getRecentPosts(locale: string = 'th') {
       }
     }
   `;
-  const data = await getClient(locale).request(query);
-  return (data as any).posts.nodes;
+  try {
+    const data = await getClient(locale).request(query);
+    return (data as any).posts.nodes;
+  } catch (error) {
+    console.error(`Error fetching recent posts (${locale}):`, error);
+    return []; // Return empty array instead of crashing
+  }
 }
 
 export async function getPostBySlug(slug: string, locale: string = 'th') {
@@ -95,8 +105,13 @@ export async function getPostBySlug(slug: string, locale: string = 'th') {
       }
     }
   `;
-  const data = await getClient(locale).request(query, { slug });
-  return (data as any).post;
+  try {
+    const data = await getClient(locale).request(query, { slug });
+    return (data as any).post;
+  } catch (error) {
+    console.error(`Error fetching post by slug (${slug}, ${locale}):`, error);
+    return null;
+  }
 }
 
 export async function getCategories(locale: string = 'th') {
@@ -111,8 +126,13 @@ export async function getCategories(locale: string = 'th') {
       }
     }
   `;
-  const data = await getClient(locale).request(query);
-  return (data as any).categories.nodes;
+  try {
+    const data = await getClient(locale).request(query);
+    return (data as any).categories.nodes;
+  } catch (error) {
+    console.error(`Error fetching categories (${locale}):`, error);
+    return []; // Return empty array instead of crashing
+  }
 }
 
 export async function getCategoryBySlug(slug: string, locale: string = 'th') {
