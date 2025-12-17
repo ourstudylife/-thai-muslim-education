@@ -94,8 +94,10 @@ export default async function EnglishHome() {
                             <p className="text-lg text-muted-foreground leading-relaxed">
                                 Islam places great emphasis on seeking knowledge. The Prophet Muhammad (Peace Be Upon Him) said, "Seeking knowledge is a duty upon every Muslim." Join us in learning about the virtues and proper methods of seeking knowledge.
                             </p>
-                            <Button size="lg" className="rounded-full px-8">
-                                Read Article
+                            <Button size="lg" className="rounded-full px-8" asChild>
+                                <Link href="/eng/categories">
+                                    Read Article
+                                </Link>
                             </Button>
                         </div>
                     </div>
