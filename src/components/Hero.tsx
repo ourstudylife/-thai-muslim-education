@@ -12,6 +12,7 @@ interface HeroProps {
     searchPlaceholder?: string
     buttonText?: string
     buttonLink?: string
+    searchBaseUrl?: string
 }
 
 export function Hero({
@@ -20,7 +21,8 @@ export function Hero({
     backgroundImage = "/mosque-bg.jpg",
     searchPlaceholder = "ค้นหาบทความ...",
     buttonText = "อ่านบทความล่าสุด",
-    buttonLink = "/blog"
+    buttonLink = "/blog",
+    searchBaseUrl = "/search"
 }: HeroProps) {
     const router = useRouter()
     const [searchQuery, setSearchQuery] = useState("")
@@ -28,7 +30,7 @@ export function Hero({
     const handleSearch = (e: FormEvent) => {
         e.preventDefault()
         if (searchQuery.trim()) {
-            router.push(`/search?q=${encodeURIComponent(searchQuery)}`)
+            router.push(`${searchBaseUrl}?q=${encodeURIComponent(searchQuery)}`)
         }
     }
 

@@ -22,6 +22,7 @@ export default async function EnglishHome() {
                 searchPlaceholder="Search articles..."
                 buttonText="Read Latest Articles"
                 buttonLink="/eng/blog"
+                searchBaseUrl="/eng/search"
             />
 
             {/* Category Quick Links */}
