@@ -57,7 +57,7 @@ export default async function EnglishBlogPostPage({ params }: PageProps) {
 
             {/* Content */}
             <div className="container mx-auto px-4 mt-12">
-                <div className="max-w-3xl mx-auto prose prose-lg prose-emerald dark:prose-invert">
+                <div className="max-w-3xl mx-auto prose prose-lg prose-headings:font-serif prose-headings:font-bold prose-a:text-primary prose-blockquote:text-foreground prose-blockquote:border-primary prose-img:rounded-lg">
                     <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
             </div>
