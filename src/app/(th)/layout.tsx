@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai, Playfair_Display } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEOMeta } from "@/components/SEOMeta";
 import "../globals.css";
 
 const notoSansThai = Noto_Sans_Thai({
@@ -33,9 +35,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="th">
+            <head>
+                <SEOMeta lang="th" />
+            </head>
             <body
                 className={`${notoSansThai.variable} ${playfairDisplay.variable} antialiased font-sans flex flex-col min-h-screen`}
             >
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
                 <AdSense />
                 <Header lang="th" />
                 <main className="flex-1">
