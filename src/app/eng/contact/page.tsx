@@ -78,15 +78,6 @@ export default function EnglishContactPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">
-                                    <Phone className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold mb-1">Phone</h3>
-                                    <p className="text-muted-foreground">Office Hours: 24 h</p>
-                                </div>
-                            </div>
 
                             <div className="flex items-start gap-4">
                                 <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">

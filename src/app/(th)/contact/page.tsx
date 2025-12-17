@@ -79,16 +79,6 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">
-                                    <Phone className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold mb-1">เบอร์โทรศัพท์</h3>
-                                    <p className="text-muted-foreground">+66 8X XXX XXXX</p>
-                                    <p className="text-sm text-muted-foreground">(เวลาทำการ: จันทร์-ศุกร์ 09:00 - 17:00 น.)</p>
-                                </div>
-                            </div>
 
                             <div className="flex items-start gap-4">
                                 <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">
