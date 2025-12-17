@@ -20,6 +20,9 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
     title: "Islamic Education Website",
     description: "Authentic Islamic knowledge based on Quran and Sunnah",
+    other: {
+        "google-adsense-account": "ca-pub-5088107520547104"
+    }
 };
 
 import AdSense from "@/components/AdSense";

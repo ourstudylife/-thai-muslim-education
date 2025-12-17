@@ -19,6 +19,9 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
     title: "เว็บไซต์สอนศาสนา",
     description: "แหล่งรวบรวมบทความสอนศาสนา อะกีเดาะห์ ฟิกฮ์ ตัฟซีรฺ และฮะดีษ",
+    other: {
+        "google-adsense-account": "ca-pub-5088107520547104"
+    }
 };
 
 import AdSense from "@/components/AdSense";
