@@ -74,7 +74,7 @@ export default function EnglishContactPage() {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold mb-1">Email</h3>
-                                    <p className="text-muted-foreground">contact@thaimuslimeducation.com</p>
+                                    <p className="text-muted-foreground">ourstudylife2022@gmail.com</p>
                                 </div>
                             </div>
 
@@ -84,8 +84,7 @@ export default function EnglishContactPage() {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold mb-1">Phone</h3>
-                                    <p className="text-muted-foreground">+66 8X XXX XXXX</p>
-                                    <p className="text-sm text-muted-foreground">(Office Hours: Mon-Fri 09:00 - 17:00)</p>
+                                    <p className="text-muted-foreground">Office Hours: 24 h</p>
                                 </div>
                             </div>
 
