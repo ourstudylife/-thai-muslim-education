@@ -28,7 +28,7 @@ export function Header({ lang = 'th' }: HeaderProps) {
             { name: "ติดต่อ", href: "/contact" },
         ],
         en: [
-            { name: "Main Site", href: "/eng" },
+            { name: "Main Site", href: "https://en.thaimuslimeducation.com/" },
             { name: "Home", href: "/eng" },
             { name: "Articles", href: "/eng/blog" },
             { name: "Categories", href: "/eng/categories" },
@@ -44,7 +44,7 @@ export function Header({ lang = 'th' }: HeaderProps) {
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
-                    <Link href={lang === 'en' ? "/eng" : "/"} className="flex items-center space-x-2">
+                    <Link href={lang === 'en' ? "https://en.thaimuslimeducation.com/" : "/"} className="flex items-center space-x-2">
                         <Image src="/logo.jpg" alt="Islamic Study Logo" width={50} height={50} className="object-contain" />
                     </Link>
                 </div>
