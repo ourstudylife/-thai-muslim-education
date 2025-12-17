@@ -73,8 +73,10 @@ export function Header({ lang = 'th' }: HeaderProps) {
                         </Link>
                     </Button>
 
-                    <Button variant="ghost" size="icon" aria-label="ค้นหา">
-                        <Search className="h-5 w-5" />
+                    <Button variant="ghost" size="icon" aria-label="ค้นหา" asChild>
+                        <Link href={lang === 'en' ? "/eng/search" : "/search"}>
+                            <Search className="h-5 w-5" />
+                        </Link>
                     </Button>
                     <Button className="hidden md:inline-flex" asChild>
                         <Link href={lang === 'en' ? "/eng/donate" : "/donate"}>
