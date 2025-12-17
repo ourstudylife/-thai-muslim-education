@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     description: "แหล่งรวบรวมบทความสอนศาสนา อะกีเดาะห์ ฟิกฮ์ ตัฟซีรฺ และฮะดีษ",
 };
 
+import AdSense from "@/components/AdSense";
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -31,6 +33,7 @@ export default function RootLayout({
             <body
                 className={`${notoSansThai.variable} ${playfairDisplay.variable} antialiased font-sans flex flex-col min-h-screen`}
             >
+                <AdSense />
                 <Header lang="th" />
                 <main className="flex-1">
                     {children}

@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     description: "Authentic Islamic knowledge based on Quran and Sunnah",
 };
 
+import AdSense from "@/components/AdSense";
+
 export default function EngRootLayout({
     children,
 }: Readonly<{
@@ -32,6 +34,7 @@ export default function EngRootLayout({
             <body
                 className={`${notoSansThai.variable} ${playfairDisplay.variable} antialiased font-sans flex flex-col min-h-screen`}
             >
+                <AdSense />
                 <Header lang="en" />
                 <main className="flex-1">
                     {children}
