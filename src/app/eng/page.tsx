@@ -71,7 +71,8 @@ export default async function EnglishHome() {
                             category={post.categories.nodes[0]?.name || "General"}
                             imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                             slug={post.slug}
-                        // PostCard links to `/blog/${slug}`. Need to update PostCard to support lang or accept base path.
+                            basePath="/eng/blog"
+                            readMoreText="Read More"
                         />
                     ))}
                 </div>
