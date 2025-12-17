@@ -1,53 +1,163 @@
-import { CategoryBadge } from "@/components/CategoryBadge"
-import { getCategories } from "@/lib/api"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
+import { BookOpen, Heart, Building, BookMarked } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const dynamic = 'force-dynamic'
 
-export default async function EnglishCategoriesPage() {
-    const categories = await getCategories('en')
+export default function EnglishCategoriesPage() {
+    const categories = [
+        {
+            id: 1,
+            title: "Principles of Faith",
+            titleEn: "Aqidah",
+            description: "Study the principles of faith, beliefs in Islam, knowing God, Prophets, Day of Judgment, and the components of correct belief.",
+            icon: "heart",
+            color: "from-blue-500 to-blue-600",
+            iconBg: "bg-blue-100 text-blue-600",
+            imageUrl: "/faith-card-bg-v2.png",
+            topics: [
+                "Pillars of Faith",
+                "Belief in One God",
+                "Prophets and Religious Leaders",
+                "Day of Judgment and Afterlife"
+            ],
+            href: "/eng/categories/faith"
+        },
+        {
+            id: 2,
+            title: "Principles of Practice",
+            titleEn: "Fiqh",
+            description: "Study the principles of Islamic practice, Prayer, Fasting, Charity, and lifestyle according to religious principles.",
+            icon: "building",
+            color: "from-green-500 to-green-600",
+            iconBg: "bg-green-100 text-green-600",
+            imageUrl: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1000&auto=format&fit=crop",
+            topics: [
+                "Prayer (Salah)",
+                "Fasting (Sawm)",
+                "Charity (Zakat/Sadaqah)",
+                "Hajj Pilgrimage"
+            ],
+            href: "/eng/categories/practice"
+        }
+    ]
+
+    const renderIcon = (iconName: string, className: string) => {
+        switch (iconName) {
+            case "heart":
+                return <Heart className={className} />
+            case "building":
+                return <Building className={className} />
+            default:
+                return <BookOpen className={className} />
+        }
+    }
 
     return (
-        <div className="container mx-auto px-4 py-16">
-            <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">Categories</h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Browse articles by topic to find exactly what you're looking for.
-                </p>
-            </div>
+        <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+            {/* Hero Section */}
+            <section className="relative py-16 md:py-24 bg-gradient-to-r from-primary to-primary/80 text-white">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1528123981681-b516d9629971?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10" />
+                <div className="relative container mx-auto px-4 text-center">
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                        <BookMarked className="h-5 w-5" />
+                        <span className="text-sm font-medium">Islamic Studies</span>
+                    </div>
+                    <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6">
+                        Categories
+                    </h1>
+                    <p className="text-lg md:text-xl max-w-3xl mx-auto text-white/90 leading-relaxed">
+                        A comprehensive source of correct Islamic knowledge,
+                        following the Quran and Sunnah for proper understanding.
+                    </p>
+                </div>
+            </section>
 
-            <div className="max-w-4xl mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {categories.map((cat: any) => (
-                        <Link
-                            key={cat.slug}
-                            href={`/eng/categories/${cat.slug}`}
-                            className="flex flex-col items-center justify-center p-8 rounded-xl border bg-card hover:bg-accent hover:text-accent-foreground transition-all duration-300 hover:shadow-md group"
+            {/* Categories Grid */}
+            <section className="container mx-auto px-4 py-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    {categories.map((category) => (
+                        <div
+                            key={category.id}
+                            className="group relative bg-card rounded-2xl overflow-hidden border shadow-lg hover:shadow-2xl transition-all duration-300"
                         >
-                            <span className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                                📚
-                            </span>
-                            <h3 className="text-lg font-bold mb-2">{cat.name}</h3>
-                            <span className="text-sm text-muted-foreground bg-secondary px-2.5 py-0.5 rounded-full">
-                                {cat.count} Articles
-                            </span>
-                        </Link>
+                            {/* Image Header */}
+                            <div className="relative h-48 overflow-hidden">
+                                <Image
+                                    src={category.imageUrl}
+                                    alt={category.title}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                <div className={`absolute inset-0 bg-gradient-to-t ${category.color} opacity-80`} />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className={`${category.iconBg} p-4 rounded-full shadow-lg`}>
+                                        {renderIcon(category.icon, "h-10 w-10")}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-8">
+                                <div className="mb-4">
+                                    <h2 className="font-serif text-3xl font-bold mb-2">{category.title}</h2>
+                                    <p className="text-sm text-muted-foreground uppercase tracking-wide">{category.titleEn}</p>
+                                </div>
+
+                                <p className="text-muted-foreground leading-relaxed mb-6">
+                                    {category.description}
+                                </p>
+
+                                <div className="mb-6">
+                                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                                        <BookOpen className="h-4 w-4 text-primary" />
+                                        Topics Covered
+                                    </h3>
+                                    <ul className="space-y-2">
+                                        {category.topics.map((topic, index) => (
+                                            <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                                <span className="text-primary mt-1">•</span>
+                                                <span>{topic}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <Button
+                                    asChild
+                                    className="w-full group-hover:shadow-lg transition-shadow"
+                                >
+                                    <Link href={category.href} className="flex items-center justify-center">
+                                        Learn More
+                                        <svg className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
                     ))}
                 </div>
+            </section>
 
-                <div className="mt-16 text-center">
-                    <p className="text-muted-foreground mb-6">
-                        Looking for something specific? Try searching instead.
+            {/* CTA Section */}
+            <section className="container mx-auto px-4 py-16">
+                <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 text-center border border-primary/20">
+                    <h2 className="font-serif text-3xl font-bold mb-4">Have questions about Islam?</h2>
+                    <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                        Feel free to contact us or ask for advice about Islam at any time.
                     </p>
-                    <Button variant="outline" size="lg" className="gap-2" asChild>
-                        <Link href="/eng/search">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                            Search Articles
-                        </Link>
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Button asChild size="lg">
+                            <Link href="/eng/contact">Contact Us</Link>
+                        </Button>
+                        <Button asChild variant="outline" size="lg">
+                            <Link href="/eng/blog">Read Articles</Link>
+                        </Button>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     )
 }
