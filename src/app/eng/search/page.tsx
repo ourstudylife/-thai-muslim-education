@@ -92,6 +92,8 @@ function SearchPageContent() {
                                     category={post.categories.nodes[0]?.name || "General"}
                                     imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                                     slug={post.slug}
+                                    basePath="/eng/blog"
+                                    readMoreText="Read more"
                                 />
                             ))}
                         </div>
