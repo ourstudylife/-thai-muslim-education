@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { CategoryBadge } from "@/components/CategoryBadge"
 import { TableOfContents } from "@/components/TableOfContents"
 import { useState, useEffect } from "react"
+import { calculateReadingTime } from "@/lib/utils"
 
 interface Post {
     title: string
@@ -119,7 +120,7 @@ export default function SinglePost({ params }: { params: Promise<{ slug: string 
                             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                 <User className="h-4 w-4" />
                             </div>
-                            <span className="font-medium text-foreground">{post.author?.node?.name || "Admin"}</span>
+                            <span className="font-medium text-foreground">แอดมิน</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
@@ -127,7 +128,7 @@ export default function SinglePost({ params }: { params: Promise<{ slug: string 
                         </div>
                         <div className="flex items-center gap-1">
                             <Clock className="h-4 w-4" />
-                            <span>อ่าน 5 นาที</span>
+                            <span>{"อ่าน " + calculateReadingTime(post.content)}</span>
                         </div>
                     </div>
                 </div>
