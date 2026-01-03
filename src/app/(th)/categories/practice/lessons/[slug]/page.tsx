@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { getLessonBySlug, getLessonsByCategory } from "@/lib/api"
 import { notFound } from "next/navigation"
 import { TableOfContents } from "@/components/TableOfContents"
+import { calculateReadingTime } from "@/lib/utils"
 
 export default async function PracticeLessonPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
@@ -62,11 +63,11 @@ export default async function PracticeLessonPage({ params }: { params: Promise<{
                         </div>
                         <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4" />
-                            <span>15 นาที</span>
+                            <span>{calculateReadingTime(lesson.content)}</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <User className="h-4 w-4" />
-                            <span>{lesson.author.node.name}</span>
+                            <span>แอดมิน</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <BookOpen className="h-4 w-4" />
