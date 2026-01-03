@@ -14,11 +14,28 @@ export function TableOfContents({ className }: TableOfContentsProps) {
     React.useEffect(() => {
         // Find all H2 and H3 in the prose container
         const elements = Array.from(document.querySelectorAll(".prose h2, .prose h3"))
-        const items = elements.map((elem) => ({
-            id: elem.id,
-            text: elem.textContent || "",
-            level: Number(elem.tagName.substring(1)),
-        }))
+        const items = elements.map((elem) => {
+            let id = elem.id
+            if (!id) {
+                // Generate ID from text content
+                const text = elem.textContent || ""
+                id = text
+                    .toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\u0E00-\u0E7F\w-]/g, '') // Keep Thai chars, english chars, numbers, and hyphens. Remove others.
+
+                // Fallback for empty ID (e.g. only special chars) or duplicates (simple handling)
+                if (!id) id = `heading-${Math.random().toString(36).substr(2, 9)}`
+
+                elem.id = id
+            }
+
+            return {
+                id: id,
+                text: elem.textContent || "",
+                level: Number(elem.tagName.substring(1)),
+            }
+        })
         setHeadings(items)
 
         // Intersection Observer for active state
