@@ -6,6 +6,7 @@ import { Search } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useEffect, useState, FormEvent, Suspense } from "react"
 import { searchPosts } from "@/lib/api"
+import { calculateReadingTimeEn } from "@/lib/utils"
 
 function SearchPageContent() {
     const searchParams = useSearchParams()
@@ -88,7 +89,7 @@ function SearchPageContent() {
                                     title={post.title}
                                     excerpt={post.excerpt.replace(/<[^>]+>/g, '')}
                                     date={new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                    readTime="5 min read"
+                                    readTime={calculateReadingTimeEn(post.content)}
                                     category={post.categories.nodes[0]?.name || "General"}
                                     imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                                     slug={post.slug}

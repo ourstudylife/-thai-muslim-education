@@ -2,6 +2,7 @@ import { getPostBySlug } from "@/lib/api"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { Calendar, User, Clock } from "lucide-react"
+import { calculateReadingTimeEn } from "@/lib/utils"
 
 export const dynamic = 'force-dynamic'
 
@@ -41,7 +42,7 @@ export default async function EnglishBlogPostPage({ params }: PageProps) {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4" />
-                                <span>5 min read</span>
+                                <span>{calculateReadingTimeEn(post.content)}</span>
                             </div>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-serif font-bold leading-tight mb-4">
@@ -49,7 +50,7 @@ export default async function EnglishBlogPostPage({ params }: PageProps) {
                         </h1>
                         <div className="flex items-center gap-2 text-white/90">
                             <User className="w-4 h-4" />
-                            <span>{post.author?.node?.name || "Admin"}</span>
+                            <span>Admin</span>
                         </div>
                     </div>
                 </div>
