@@ -4,6 +4,7 @@ const isExport = process.env.BUILD_STANDALONE === "true";
 
 const nextConfig: NextConfig = {
   output: isExport ? "export" : undefined,
+  trailingSlash: isExport,
   images: {
     unoptimized: isExport,
     remotePatterns: [
