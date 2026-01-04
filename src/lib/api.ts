@@ -21,6 +21,7 @@ export async function getAllPosts(locale: string = 'th') {
           slug
           date
           excerpt
+          content
           categories {
             nodes {
               name
@@ -54,6 +55,7 @@ export async function getRecentPosts(locale: string = 'th') {
           slug
           date
           excerpt
+          content
           categories {
             nodes {
               name
@@ -159,6 +161,7 @@ export async function getPostsByCategory(categorySlug: string, locale: string = 
           slug
           date
           excerpt
+          content
           categories {
             nodes {
               name
@@ -187,6 +190,7 @@ export async function searchPosts(searchQuery: string, locale: string = 'th') {
           slug
           date
           excerpt
+          content
           categories {
             nodes {
               name
