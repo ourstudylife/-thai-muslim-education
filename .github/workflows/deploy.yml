@@ -27,6 +27,8 @@ jobs:
         run: npm run build
         env:
           BUILD_STANDALONE: "true"
+          NEXT_PUBLIC_WORDPRESS_API_URL: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL }}
+          NEXT_PUBLIC_WORDPRESS_API_URL_EN: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL_EN }}
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -2,7 +2,7 @@ import { PostCard } from "@/components/PostCard"
 import { getAllPosts } from "@/lib/api"
 
 // Force dynamic rendering to get fresh content on navigation
-export const dynamic = 'force-dynamic'
+
 
 export default async function EnglishBlogPage() {
     const posts = await getAllPosts('en')

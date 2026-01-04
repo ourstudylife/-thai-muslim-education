@@ -3,7 +3,7 @@ import { ArrowLeft, Check, BookOpen, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getLessonsByCategory } from "@/lib/api"
 
-export const dynamic = 'force-dynamic'
+
 
 export default async function FaithPage() {
     const lessons = await getLessonsByCategory("faith-lessons")

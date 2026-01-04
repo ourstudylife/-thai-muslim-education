@@ -3,7 +3,7 @@ import Image from "next/image"
 import { BookOpen, Heart, Building, BookMarked } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export const dynamic = 'force-dynamic'
+
 
 export default function EnglishCategoriesPage() {
     const categories = [

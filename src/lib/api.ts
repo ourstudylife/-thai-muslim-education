@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-const API_URL_TH = process.env.NEXT_PUBLIC_WORDPRESS_API_URL as string;
+const API_URL_TH = process.env.NEXT_PUBLIC_WORDPRESS_API_URL as string || 'https://thaimuslimeducation.com/graphql';
 const API_URL_EN = process.env.NEXT_PUBLIC_WORDPRESS_API_URL_EN as string || 'https://en.thaimuslimeducation.com/graphql';
 
 // Helper to get the correct client based on locale

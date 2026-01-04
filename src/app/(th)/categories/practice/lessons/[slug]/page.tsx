@@ -63,7 +63,7 @@ export default async function PracticeLessonPage({ params }: { params: Promise<{
                         </div>
                         <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4" />
-                            <span>{calculateReadingTime(lesson.content)}</span>
+                            <span>{calculateReadingTime(lesson.content || "")}</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <User className="h-4 w-4" />
@@ -155,4 +155,13 @@ export default async function PracticeLessonPage({ params }: { params: Promise<{
             </div>
         </article>
     )
+}
+
+export async function generateStaticParams() {
+    const { getLessonsByCategory } = await import("@/lib/api")
+    const lessons = await getLessonsByCategory("practice-lessons")
+
+    return lessons.map((lesson: any) => ({
+        slug: lesson.slug,
+    }))
 }

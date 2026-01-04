@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function calculateReadingTime(content: string): string {
+    if (!content) return "0 นาที"
     const cleanContent = content.replace(/<[^>]*>/g, '') // Remove HTML tags
     const charCount = cleanContent.length
     const readingSpeed = 500 // Characters per minute for Thai
@@ -14,6 +15,7 @@ export function calculateReadingTime(content: string): string {
 }
 
 export function calculateReadingTimeEn(content: string): string {
+    if (!content) return "0 min read"
     const cleanContent = content.replace(/<[^>]*>/g, '') // Remove HTML tags
     const wordCount = cleanContent.trim().split(/\s+/).length
     const readingSpeed = 200 // Words per minute for English

@@ -55,7 +55,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                                 <PostCard
                                     key={post.slug}
                                     title={post.title}
-                                    excerpt={post.excerpt.replace(/<[^>]+>/g, '')}
+                                    excerpt={(post.excerpt || "").replace(/<[^>]+>/g, '')}
                                     date={new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}
                                     readTime="5 นาที"
                                     category={post.categories.nodes[0]?.name || "ทั่วไป"}
@@ -83,4 +83,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </div>
         </div>
     )
+}
+
+export async function generateStaticParams() {
+    const { getCategories } = await import("@/lib/api")
+    const categories = await getCategories("th")
+
+    return categories.map((cat: any) => ({
+        slug: cat.slug,
+    }))
 }

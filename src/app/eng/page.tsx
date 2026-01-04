@@ -2,7 +2,7 @@ import { Hero } from "@/components/Hero"
 import { PostCard } from "@/components/PostCard"
 import { CategoryBadge } from "@/components/CategoryBadge"
 
-export const dynamic = 'force-dynamic'
+
 import { Newsletter } from "@/components/Newsletter"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"

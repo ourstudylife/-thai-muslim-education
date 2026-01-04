@@ -3,8 +3,6 @@ import { getCategoryBySlug, getPostsByCategory } from "@/lib/api"
 import { notFound } from "next/navigation"
 import { calculateReadingTimeEn } from "@/lib/utils"
 
-export const dynamic = 'force-dynamic'
-
 interface PageProps {
     params: Promise<{ slug: string }>
 }
@@ -13,7 +11,7 @@ export default async function EnglishCategoryPage({ params }: PageProps) {
     const { slug } = await params
     const [category, posts] = await Promise.all([
         getCategoryBySlug(slug, 'en'),
-        getPostsByCategory(slug, 'en') // Note: getPostsByCategory uses categoryName, which usually matches slug or name. If WPGraphQL uses name, this might fail if slug != name. Standard typically implies slug unless customized. Let's assume slug works or is compatible.
+        getPostsByCategory(slug, 'en')
     ])
 
     if (!category) {
@@ -42,9 +40,9 @@ export default async function EnglishCategoryPage({ params }: PageProps) {
                     <PostCard
                         key={post.slug}
                         title={post.title}
-                        excerpt={post.excerpt.replace(/<[^>]+>/g, '')}
+                        excerpt={(post.excerpt || "").replace(/<[^>]+>/g, '')}
                         date={new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                        readTime={calculateReadingTimeEn(post.content)}
+                        readTime={calculateReadingTimeEn(post.content || "")}
                         category={category.name} // We know the category
                         imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                         slug={post.slug}
@@ -64,4 +62,13 @@ export default async function EnglishCategoryPage({ params }: PageProps) {
             )}
         </div>
     )
+}
+
+export async function generateStaticParams() {
+    const { getCategories } = await import("@/lib/api")
+    const categories = await getCategories("en")
+
+    return categories.map((cat: any) => ({
+        slug: cat.slug,
+    }))
 }

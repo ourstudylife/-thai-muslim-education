@@ -4,7 +4,6 @@ import Image from "next/image"
 import { Calendar, User, Clock } from "lucide-react"
 import { calculateReadingTimeEn } from "@/lib/utils"
 
-export const dynamic = 'force-dynamic'
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -42,7 +41,7 @@ export default async function EnglishBlogPostPage({ params }: PageProps) {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4" />
-                                <span>{calculateReadingTimeEn(post.content)}</span>
+                                <span>{calculateReadingTimeEn(post.content || "")}</span>
                             </div>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-serif font-bold leading-tight mb-4">
@@ -64,4 +63,13 @@ export default async function EnglishBlogPostPage({ params }: PageProps) {
             </div>
         </article>
     )
+}
+
+export async function generateStaticParams() {
+    const { getAllPosts } = await import("@/lib/api")
+    const posts = await getAllPosts("en")
+
+    return posts.map((post: any) => ({
+        slug: post.slug,
+    }))
 }
