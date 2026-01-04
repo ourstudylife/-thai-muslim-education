@@ -1,0 +1,361 @@
+/* Main Layout & Typography */
+:root {
+    --primary: #10B981;
+    --primary-hover: #059669;
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+.premium-heading {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 3.5rem;
+}
+
+/* Glass UI Elements */
+.glass-nav {
+    padding: 1.25rem 0;
+    backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.glass-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 7rem 0 5rem;
+    position: relative;
+}
+
+.search-container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 6px;
+    position: relative;
+    border-radius: 100px;
+}
+
+#city-search {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 18px 30px;
+    font-size: 1.15rem;
+    color: #fff;
+    outline: none;
+}
+
+#city-search::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Clock & Data */
+.meta-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.clock-label {
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.separator {
+    opacity: 0.3;
+}
+
+/* Grid Systems */
+.grid-cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 3rem 0;
+}
+
+.city-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    text-decoration: none;
+    color: #fff;
+    transition: all var(--transition-smooth);
+}
+
+.city-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.city-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.country-name {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Timer Display */
+.countdown-card {
+    padding: 4rem 2rem;
+    margin: 3rem auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.next-prayer-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#next-prayer-name {
+    font-size: 2.5rem;
+    margin: 0.5rem 0 1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.timer-display {
+    font-size: clamp(3.5rem, 12vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Style */
+.prayer-times-table {
+    margin: 4rem 0;
+    padding: 1rem;
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2.5rem;
+    border-radius: 16px;
+    margin-bottom: 8px;
+    transition: all var(--transition-smooth);
+}
+
+.time-row .label {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.time-row .time {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.time-row.active {
+    background: var(--primary);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.35);
+    transform: scale(1.03);
+}
+
+/* Utilities */
+.utilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 5rem;
+}
+
+.util-card {
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.compass-container {
+    width: 150px;
+    height: 150px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.compass {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.needle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(to bottom, #ef4444 50%, #fff 50%);
+    transform: translate(-50%, -100%);
+    border-radius: 100px;
+}
+
+.kaaba-icon {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+}
+
+/* Search Dropdown */
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.search-item {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.search-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.item-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Buttons */
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main>* {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 640px) {
+    .premium-heading {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .countdown-card {
+        padding: 3rem 1rem;
+    }
+}

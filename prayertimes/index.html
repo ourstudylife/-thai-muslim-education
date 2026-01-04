@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Prayer Times | Premium Accurate Guide</title>
+    <meta name="description"
+        content="Get accurate daily prayer times for cities worldwide. Interactive countdown, Qibla, and premium design inspired by Fazilet Takvimi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body class="theme-default">
+    <div class="background-overlay"></div>
+
+    <header class="glass-nav">
+        <div class="container">
+            <a href="/" class="logo">
+                <span class="icon">🕌</span>
+                <span class="text">PrayerTimes</span>
+            </a>
+            <nav>
+                <button id="lang-toggle" class="btn-secondary">ไทย / EN</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container text-center">
+                <h1 class="premium-heading" data-en="Global Prayer Times" data-th="เวลาละหมาดทั่วโลก">Global Prayer
+                    Times</h1>
+
+                <div class="meta-row">
+                    <span id="current-clock" class="clock-label">--:--:--</span>
+                </div>
+
+                <p class="subtitle" data-en="Accurate schedules with a premium glassmorphic experience"
+                    data-th="ตารางเวลาที่แม่นยำพร้อมประสบการณ์ระดับพรีเมียม">Accurate schedules with a premium
+                    glassmorphic experience</p>
+
+                <div class="search-container glass-card">
+                    <input type="text" id="city-search" placeholder="Search city (e.g. Bangkok, London...)"
+                        data-en-placeholder="Search city (e.g. Bangkok, London...)"
+                        data-th-placeholder="ค้นหาเมือง (เช่น กรุงเทพ, ลอนดอน...)">
+                    <div id="search-results" class="search-dropdown hidden"></div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <button id="detect-location" class="btn-secondary" style="border-radius: 100px;">
+                        <span class="icon">📍</span> <span data-en="Detect My Location"
+                            data-th="ค้นหาตำแหน่งของฉัน">Detect My Location</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <div class="container">
+                <div class="grid-cities">
+                    <a href="/thailand/bangkok" class="city-card glass-card">
+                        <span class="country-name">Thailand</span>
+                        <span class="city-name">Bangkok</span>
+                    </a>
+                    <a href="/turkey/istanbul" class="city-card glass-card">
+                        <span class="country-name">Turkey</span>
+                        <span class="city-name">Istanbul</span>
+                    </a>
+                    <a href="/thailand/yala" class="city-card glass-card">
+                        <span class="country-name">Thailand</span>
+                        <span class="city-name">Yala</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-preview">
+            <div class="container">
+                <div class="grid-cities">
+                    <div class="util-card glass-card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🧭</div>
+                        <h3 data-en="Interactive Qibla" data-th="เข็มทิศกิบลัต">Interactive Qibla</h3>
+                        <p data-en="Find the right direction from anywhere using your device compass."
+                            data-th="ค้นหาทิศละหมาดที่ถูกต้องได้จากทุกที่">Find the right direction from anywhere using
+                            your device compass.</p>
+                    </div>
+                    <div class="util-card glass-card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                        <h3 data-en="Hijri Calendar" data-th="ปฏิทินฮิจเราะห์">Hijri Calendar</h3>
+                        <p data-en="Automatic Hijri date calculation displayed elegantly."
+                            data-th="การคำนวณวันที่ฮิจเราะห์อัตโนมัติ">Automatic Hijri date calculation displayed
+                            elegantly.</p>
+                    </div>
+                    <div class="util-card glass-card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                        <h3 data-en="Fast & Reliable" data-th="รวดเร็วและแม่นยำ">Fast & Reliable</h3>
+                        <p data-en="Lightweight static site with offline caching support."
+                            data-th="เว็บไซต์ที่รวดเร็วพร้อมระบบแคช">Lightweight static site with offline caching
+                            support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container text-center" style="padding: 4rem 0;">
+            <p class="attribution">Prayer times based on <a href="https://fazilettakvimi.com/" target="_blank"
+                    style="color: var(--primary);">Fazilet Takvimi</a></p>
+            <p class="copyright">&copy; 2025 Thai Muslim Education. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/app.js"></script>
+</body>
+
+</html>

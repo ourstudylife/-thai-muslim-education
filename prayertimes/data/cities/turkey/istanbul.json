@@ -1,0 +1,15 @@
+{
+    "city": "Istanbul",
+    "country": "Turkey",
+    "timezone": "GMT+3",
+    "times": {
+        "fajr": "06:15",
+        "sunrise": "08:22",
+        "dhuhr": "13:05",
+        "asr": "15:18",
+        "maghrib": "17:38",
+        "isha": "19:35"
+    },
+    "qibla": 147,
+    "source": "Fazilet Takvimi"
+}

@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Redirect /thailand/bangkok to /city.html?city=bangkok&country=thailand
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/([^/]+)/?$ city.html?country=$1&city=$2 [L,QSA]
+
+# Handle single level URLs if needed
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ city.html?city=$1 [L,QSA]
+
+# Remove .html extension from physical files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]

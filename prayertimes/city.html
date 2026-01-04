@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Times | Premium Islamic Schedule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script type="application/ld+json" id="seo-schema"></script>
+</head>
+
+<body class="theme-dynamic">
+    <div class="background-overlay" id="dynamic-bg"></div>
+
+    <header class="glass-nav">
+        <div class="container">
+            <a href="/" class="logo">
+                <span class="icon">🕌</span>
+                <span class="text">PrayerTimes</span>
+            </a>
+            <nav>
+                <button id="lang-toggle" class="btn-secondary">ไทย / EN</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container city-container" style="padding: 4rem 20px;">
+            <section class="live-status text-center">
+                <h1 id="city-title" class="premium-heading">Loading...</h1>
+                <p id="city-subtitle" class="opacity-70" style="margin-top: -1rem; margin-bottom: 1.5rem;"></p>
+                <div class="meta-row">
+                    <span id="hijri-date" class="hijri-label">-- -- ----</span>
+                    <span class="separator">•</span>
+                    <span id="current-clock" class="clock-label">--:--:--</span>
+                </div>
+                <div id="countdown-container" class="countdown-card glass-card">
+                    <span class="next-prayer-label" data-en="Next Prayer:" data-th="ละหมาดถัดไป:">Next Prayer:</span>
+                    <h2 id="next-prayer-name">--</h2>
+                    <div id="timer" class="timer-display">--:--:--</div>
+                </div>
+            </section>
+
+            <section class="prayer-times-table glass-card">
+                <div class="table-header">
+                    <div class="date-selector">
+                        <span id="current-display-date">-- -- ---</span>
+                    </div>
+                    <button id="share-times" class="btn-secondary">Share Card</button>
+                </div>
+                <div class="times-grid">
+                    <div class="time-row" id="row-fajr">
+                        <span class="label" data-en="Fajr (Imsak)" data-th="ฟัจร์ (อิมซาก)">Fajr (Imsak)</span>
+                        <span class="time" id="time-fajr">--:--</span>
+                    </div>
+                    <div class="time-row" id="row-sunrise">
+                        <span class="label" data-en="Sunrise" data-th="ดวงอาทิตย์ขึ้น">Sunrise</span>
+                        <span class="time" id="time-sunrise">--:--</span>
+                    </div>
+                    <div class="time-row" id="row-dhuhr">
+                        <span class="label" data-en="Dhuhr" data-th="ซุฮรี">Dhuhr</span>
+                        <span class="time" id="time-dhuhr">--:--</span>
+                    </div>
+                    <div class="time-row" id="row-asr">
+                        <span class="label" data-en="Asr" data-th="อัศรี">Asr</span>
+                        <span class="time" id="time-asr">--:--</span>
+                    </div>
+                    <div class="time-row" id="row-maghrib">
+                        <span class="label" data-en="Maghrib" data-th="มัฆริบ">Maghrib</span>
+                        <span class="time" id="time-maghrib">--:--</span>
+                    </div>
+                    <div class="time-row" id="row-isha">
+                        <span class="label" data-en="Isha" data-th="อีชา">Isha</span>
+                        <span class="time" id="time-isha">--:--</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="utilities-grid">
+                <div class="util-card glass-card" id="qibla-finder">
+                    <h3>Qibla</h3>
+                    <div class="compass-container">
+                        <div class="compass" id="compass">
+                            <div class="needle"></div>
+                            <div class="kaaba-icon">🕋</div>
+                        </div>
+                    </div>
+                    <p id="qibla-deg">--° --</p>
+                </div>
+                <div class="util-card glass-card" id="daily-hadith">
+                    <h3 data-en="Daily Hadith" data-th="หะดีษประจำวัน">Daily Hadith</h3>
+                    <p id="hadith-text">Searching for daily guidance...</p>
+                    <span class="hadith-ref"></span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container text-center" style="padding: 2rem 0;">
+            <p class="attribution">Prayer times based on <a href="https://fazilettakvimi.com/" target="_blank"
+                    style="color: var(--primary);">Fazilet Takvimi</a></p>
+            <p class="copyright">&copy; 2025 Thai Muslim Education. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/hijri.js"></script>
+    <script src="/assets/js/qibla.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+
+</html>
