@@ -7,6 +7,7 @@ import { Newsletter } from "@/components/Newsletter"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { getRecentPosts, getCategories } from "@/lib/api"
+import { calculateReadingTimeEn } from "@/lib/utils"
 
 export default async function EnglishHome() {
     const [posts, categories] = await Promise.all([
@@ -67,7 +68,7 @@ export default async function EnglishHome() {
                             title={post.title}
                             excerpt={post.excerpt.replace(/<[^>]+>/g, '')} // Strip HTML tags
                             date={new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                            readTime="5 min read"
+                            readTime={calculateReadingTimeEn(post.content)}
                             category={post.categories.nodes[0]?.name || "General"}
                             imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                             slug={post.slug}
