@@ -141,6 +141,7 @@ export async function getCategoryBySlug(slug: string, locale: string = 'th') {
   const query = `
     query GetCategoryBySlug($slug: ID!) {
       category(id: $slug, idType: SLUG) {
+        databaseId
         name
         slug
         description
@@ -178,6 +179,35 @@ export async function getPostsByCategory(categorySlug: string, locale: string = 
     }
   `;
   const data = await getClient(locale).request(query, { categorySlug });
+  return (data as any).posts.nodes;
+}
+
+export async function getPostsByCategoryId(categoryId: number, locale: string = 'th') {
+  const query = `
+    query GetPostsByCategoryId($categoryId: Int!) {
+      posts(first: 100, where: { categoryId: $categoryId, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          title
+          slug
+          date
+          excerpt
+          content
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await getClient(locale).request(query, { categoryId });
   return (data as any).posts.nodes;
 }
 

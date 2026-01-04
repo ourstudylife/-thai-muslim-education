@@ -9,14 +9,16 @@ import { ChevronRight } from "lucide-react"
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
 
-    const [posts, category] = await Promise.all([
-        getPostsByCategory(slug),
+    const [category] = await Promise.all([
         getCategoryBySlug(slug)
     ])
 
     if (!category) {
         notFound()
     }
+
+    const { getPostsByCategoryId } = await import("@/lib/api")
+    const posts = await getPostsByCategoryId(category.databaseId)
 
     return (
         <div className="min-h-screen bg-background">
