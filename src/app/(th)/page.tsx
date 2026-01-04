@@ -7,6 +7,7 @@ import { Newsletter } from "@/components/Newsletter"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { getRecentPosts, getCategories } from "@/lib/api"
+import { calculateReadingTime } from "@/lib/utils"
 
 export default async function Home() {
   const [posts, categories] = await Promise.all([
@@ -56,7 +57,7 @@ export default async function Home() {
               title={post.title}
               excerpt={post.excerpt.replace(/<[^>]+>/g, '')} // Strip HTML tags
               date={new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}
-              readTime="5 นาที" // Placeholder as WP doesn't provide read time by default
+              readTime={calculateReadingTime(post.content)}
               category={post.categories.nodes[0]?.name || "ทั่วไป"}
               imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
               slug={post.slug}

@@ -2,6 +2,7 @@ import { PostCard } from "@/components/PostCard"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { getPostsByCategory, getCategoryBySlug } from "@/lib/api"
+import { calculateReadingTime } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import { ChevronRight } from "lucide-react"
 
@@ -57,7 +58,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                                     title={post.title}
                                     excerpt={(post.excerpt || "").replace(/<[^>]+>/g, '')}
                                     date={new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })}
-                                    readTime="5 นาที"
+                                    readTime={calculateReadingTime(post.content)}
                                     category={post.categories.nodes[0]?.name || "ทั่วไป"}
                                     imageUrl={post.featuredImage?.node?.sourceUrl || "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"}
                                     slug={post.slug}
