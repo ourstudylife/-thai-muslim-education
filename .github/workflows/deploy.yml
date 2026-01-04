@@ -25,6 +25,8 @@ jobs:
 
       - name: Build Project
         run: npm run build
+        env:
+          BUILD_STANDALONE: "true"
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
