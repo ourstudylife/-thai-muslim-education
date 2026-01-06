@@ -83,79 +83,14 @@ $emailBody = "
 </html>
 ";
 
-// --- 1. Send Email First ---
-$adminEmailBody = $emailBody; // We'll update this later if we need to add debug info
-$mailSent = mail($to, $subject, $adminEmailBody, $headers);
-
-// --- 2. Google Sheets Integration (Background/Attempt after mail) ---
-$googleScriptUrl = "https://script.google.com/macros/s/AKfycbzkk9BplJechqkNO7Ngf3fUvm23k5c7glbFtUPUQiW6LM-UOpORIE96UBsgBOlKpNY/exec";
-$sheetStatus = "Not attempted";
-
-if ($mailSent && !empty($googleScriptUrl)) {
-    try {
-        $postData = [
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'whatsapp' => $whatsapp ?: "-",
-            'lineId' => $lineId ?: "-",
-            'preferredMethod' => $preferredMethod,
-            'message' => $message
-        ];
-        $queryString = http_build_query($postData);
-
-        // Method 1: cURL (More robust for external calls)
-        $ch = curl_init($googleScriptUrl);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $queryString);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Shorter timeout to avoid hanging
-        $response = curl_exec($ch);
-        $curlError = curl_error($ch);
-        curl_close($ch);
-
-        if ($response) {
-            $sheetStatus = "Success | Response: " . $response;
-        } else {
-            // Fallback: file_get_contents
-            $options = [
-                'http' => [
-                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method' => 'POST',
-                    'content' => $queryString,
-                    'timeout' => 5,
-                    'follow_location' => 1
-                ],
-                'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]
-            ];
-            $context = stream_context_create($options);
-            $response = @file_get_contents($googleScriptUrl, false, $context);
-            if ($response !== false) {
-                $sheetStatus = "Success (Fallback) | Response: " . $response;
-            } else {
-                $sheetStatus = "Failed. cURL Error: " . ($curlError ?: "Unknown") . ". PHP outbound might be blocked.";
-            }
-        }
-    } catch (Exception $e) {
-        $sheetStatus = "Exception occurred: " . $e->getMessage();
-    }
-}
+// --- Send Email ---
+$mailSent = mail($to, $subject, $emailBody, $headers);
 
 // Final Response
 if ($mailSent) {
-    echo json_encode([
-        'success' => true,
-        'message' => 'Email sent successfully',
-        'sheet_status' => $sheetStatus
-    ]);
+    echo json_encode(['success' => true, 'message' => 'Email sent successfully']);
 } else {
     http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'error' => 'Failed to send email. Please check your server mail configuration.',
-        'sheet_status' => $sheetStatus
-    ]);
+    echo json_encode(['success' => false, 'error' => 'Failed to send email.']);
 }
 ?>
