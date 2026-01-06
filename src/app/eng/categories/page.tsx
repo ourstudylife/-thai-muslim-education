@@ -39,7 +39,7 @@ export default function EnglishCategoriesPage() {
                 "Charity (Zakat/Sadaqah)",
                 "Hajj Pilgrimage"
             ],
-            href: "/eng/categories/practice"
+            href: "/eng/categories/fiqh"
         }
     ]
 
