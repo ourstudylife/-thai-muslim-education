@@ -79,6 +79,23 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">
+                                    <MessageCircle className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold mb-1">WhatsApp</h3>
+                                    <a
+                                        href="https://wa.me/66939513698"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-muted-foreground hover:text-emerald-600 transition-colors"
+                                    >
+                                        +66 93 951 3698
+                                    </a>
+                                </div>
+                            </div>
+
 
                             <div className="flex items-start gap-4">
                                 <div className="p-3 bg-emerald-100 rounded-lg text-emerald-600">
