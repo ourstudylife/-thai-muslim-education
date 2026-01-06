@@ -17,7 +17,7 @@ export async function submitContactForm(formData: any) {
             body: JSON.stringify(formData),
         }).then(res => res.json());
 
-        const googleSheetPromise = fetch('https://script.google.com/macros/s/AKfycbzkk9BplJechqkNO7Ngf3fUvm23k5c7glbFtUPUQiW6LM-UOpORIE96UBsgBOlKpNY/exec', {
+        const googleSheetPromise = fetch('https://script.google.com/macros/s/AKfycbyvQkTwdnqsL6l1ILyCKE04agen05INIkwY9Gswk7oPWxm0_KU6ZPkbe9848nCUuqLn/exec', {
             method: 'POST',
             mode: 'no-cors', // CORS can be tricky with Apps Script, no-cors is often enough for simple submissions
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
