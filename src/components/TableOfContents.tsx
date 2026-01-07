@@ -5,9 +5,10 @@ import { cn } from "@/lib/utils"
 
 interface TableOfContentsProps {
     className?: string
+    title?: string
 }
 
-export function TableOfContents({ className }: TableOfContentsProps) {
+export function TableOfContents({ className, title = "สารบัญ" }: TableOfContentsProps) {
     const [headings, setHeadings] = React.useState<{ id: string; text: string; level: number }[]>([])
     const [activeId, setActiveId] = React.useState<string>("")
 
@@ -59,7 +60,7 @@ export function TableOfContents({ className }: TableOfContentsProps) {
 
     return (
         <div className={cn("space-y-2", className)}>
-            <h3 className="font-serif text-lg font-bold mb-4">สารบัญ</h3>
+            <h3 className="font-serif text-lg font-bold mb-4">{title}</h3>
             <nav className="space-y-1">
                 {headings.map((heading) => (
                     <a
