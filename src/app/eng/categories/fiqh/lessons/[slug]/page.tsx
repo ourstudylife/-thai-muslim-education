@@ -10,7 +10,7 @@ import { calculateReadingTimeEn } from "@/lib/utils"
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-    const lessons = await getLessonsByCategory("fiqh", "en")
+    const lessons = await getLessonsByCategory("practice", "en")
     return lessons.map((lesson: any) => ({
         slug: lesson.slug,
     }))
@@ -18,14 +18,14 @@ export async function generateStaticParams() {
 
 export default async function EnglishFiqhLessonPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const lesson = await getLessonBySlug(slug, "fiqh", "en")
+    const lesson = await getLessonBySlug(slug, "practice", "en")
 
     if (!lesson) {
         notFound()
     }
 
     // Get related lessons
-    const allLessons = await getLessonsByCategory("fiqh", "en")
+    const allLessons = await getLessonsByCategory("practice", "en")
     const currentIndex = allLessons.findIndex((l: any) => l.slug === slug)
     const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null
     const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null

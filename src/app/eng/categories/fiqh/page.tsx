@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { getLessonsByCategory } from "@/lib/api"
 
 export default async function EnglishFiqhPage() {
-    const lessons = await getLessonsByCategory("fiqh", "en")
+    const lessons = await getLessonsByCategory("practice", "en")
 
     // Colors for timeline steps to cycle through
     const colors = [
