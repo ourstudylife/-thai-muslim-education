@@ -267,7 +267,7 @@ export async function getLessonsByCategory(categorySlug: string, locale: string 
   `;
   try {
     const data = await getClient(locale).request(query, { categorySlug });
-    return (data as any).posts.nodes;
+    return (data as any).posts?.nodes || [];
   } catch (error) {
     console.error(`Error fetching lessons for category ${categorySlug}:`, error);
     return []; // Return empty array to keep build running

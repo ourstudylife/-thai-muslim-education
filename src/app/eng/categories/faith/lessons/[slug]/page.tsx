@@ -7,6 +7,15 @@ import { notFound } from "next/navigation"
 import { TableOfContents } from "@/components/TableOfContents"
 import { calculateReadingTimeEn } from "@/lib/utils"
 
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+    const lessons = await getLessonsByCategory("faith", "en")
+    return lessons.map((lesson: any) => ({
+        slug: lesson.slug,
+    }))
+}
+
 export default async function EnglishFaithLessonPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
     const lesson = await getLessonBySlug(slug, "faith", "en")
@@ -157,11 +166,3 @@ export default async function EnglishFaithLessonPage({ params }: { params: Promi
     )
 }
 
-export async function generateStaticParams() {
-    const { getLessonsByCategory } = await import("@/lib/api")
-    const lessons = await getLessonsByCategory("faith", "en")
-
-    return lessons.map((lesson: any) => ({
-        slug: lesson.slug,
-    }))
-}
