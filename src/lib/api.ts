@@ -243,10 +243,7 @@ export async function searchPosts(searchQuery: string, locale: string = 'th') {
 export async function getLessonsByCategory(categorySlug: string, locale: string = 'th') {
   const query = `
     query GetLessonsByCategory($categorySlug: String!) {
-      posts(
-        first: 100
-        where: { categoryName: $categorySlug, orderby: { field: DATE, order: ASC } }
-      ) {
+      posts(first: 100, where: { categoryName: $categorySlug, orderby: { field: DATE, order: ASC } }) {
         nodes {
           title
           slug
@@ -268,14 +265,8 @@ export async function getLessonsByCategory(categorySlug: string, locale: string 
       }
     }
   `;
-  try {
-    const data = await getClient(locale).request(query, { categorySlug });
-    return (data as any).posts.nodes;
-  } catch (error) {
-    console.error(`Error fetching lessons by category (${categorySlug}, ${locale}):`, error);
-    // If it fails, return empty array to prevent build crash, but log the error
-    return [];
-  }
+  const data = await getClient(locale).request(query, { categorySlug });
+  return (data as any).posts.nodes;
 }
 
 export async function getLessonBySlug(slug: string, categorySlug: string, locale: string = 'th') {

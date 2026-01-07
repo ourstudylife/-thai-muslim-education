@@ -5,8 +5,6 @@ import { ArrowLeft, Check, BookOpen, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getLessonsByCategory } from "@/lib/api"
 
-export const revalidate = 3600; // Revalidate every hour
-
 export default async function PracticePage() {
     const lessons = await getLessonsByCategory("practice-lessons")
 
