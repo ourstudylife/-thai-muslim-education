@@ -245,19 +245,7 @@ export async function getLessonsByCategory(categorySlug: string, locale: string 
     query GetLessonsByCategory($categorySlug: String!) {
       posts(
         first: 100
-        where: {
-          taxQuery: {
-            taxArray: [
-              {
-                taxonomy: CATEGORY,
-                operator: IN,
-                terms: [$categorySlug],
-                field: SLUG
-              }
-            ]
-          }
-          orderby: { field: DATE, order: ASC }
-        }
+        where: { categoryName: $categorySlug, orderby: { field: DATE, order: ASC } }
       ) {
         nodes {
           title
@@ -285,6 +273,7 @@ export async function getLessonsByCategory(categorySlug: string, locale: string 
     return (data as any).posts.nodes;
   } catch (error) {
     console.error(`Error fetching lessons by category (${categorySlug}, ${locale}):`, error);
+    // If it fails, return empty array to prevent build crash, but log the error
     return [];
   }
 }
