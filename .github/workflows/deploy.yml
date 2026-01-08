@@ -23,6 +23,9 @@ jobs:
           node-version: "20"
           cache: "npm"
 
+      - name: Wait for WordPress to settle
+        run: sleep 20
+
       - name: Install Dependencies
         run: npm ci
 
