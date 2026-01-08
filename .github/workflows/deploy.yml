@@ -8,6 +8,10 @@ on:
     types: [wordpress_post_published]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: Build & Deploy
