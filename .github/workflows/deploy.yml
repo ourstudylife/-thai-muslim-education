@@ -41,6 +41,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: ./
+          protocol: ftps
+          log-level: verbose
           dangerous-clean-slate: false
           exclude: |
             **/*.txt
