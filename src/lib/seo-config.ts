@@ -3,24 +3,25 @@
 
 export const SEO_CONFIG = {
     // Toggle SEO authority transfer features
+    // FOR THIS SITE TO RANK: Set this to false so we don't redirect authority away
     enabled: process.env.NEXT_PUBLIC_SEO_TRANSFER_ENABLED === 'true',
 
-    // WordPress authority sites (where SEO should point)
+    // WordPress authority sites (used for data fetching now, not SEO redirection)
     wordpress: {
         th: process.env.NEXT_PUBLIC_WP_URL_TH || 'https://thaimuslimeducation.com',
         en: process.env.NEXT_PUBLIC_WP_URL_EN || 'https://en.thaimuslimeducation.com',
     },
 
-    // Vercel site (this site)
+    // Vercel site (this site) - The main site we want to rank
     vercel: {
         url: process.env.NEXT_PUBLIC_VERCEL_URL || 'https://thai-muslim-education.vercel.app',
     },
 
     // Control individual features
     features: {
-        noindex: process.env.NEXT_PUBLIC_SEO_NOINDEX !== 'false', // Default: true when enabled
-        canonical: process.env.NEXT_PUBLIC_SEO_CANONICAL !== 'false', // Default: true when enabled
-        hreflang: process.env.NEXT_PUBLIC_SEO_HREFLANG !== 'false', // Default: true when enabled
+        noindex: false, // We WANT to index this site
+        canonical: true, // We want canonical tags pointing to self usually
+        hreflang: true,
     },
 } as const;
 
