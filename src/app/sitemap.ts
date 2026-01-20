@@ -8,7 +8,7 @@ const STATIC_CATEGORIES_TH = ['faith', 'practice', 'fiqh', 'history'];
 const STATIC_CATEGORIES_EN = ['faith', 'practice', 'fiqh', 'history'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'https://thai-muslim-education.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thaimuslimeducation.com';
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [

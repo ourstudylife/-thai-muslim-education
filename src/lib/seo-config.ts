@@ -12,9 +12,9 @@ export const SEO_CONFIG = {
         en: process.env.NEXT_PUBLIC_WP_URL_EN || 'https://en.thaimuslimeducation.com',
     },
 
-    // Vercel site (this site) - The main site we want to rank
-    vercel: {
-        url: process.env.NEXT_PUBLIC_VERCEL_URL || 'https://thai-muslim-education.vercel.app',
+    // Main site URL (deployed on Hostinger)
+    site: {
+        url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thaimuslimeducation.com',
     },
 
     // Control individual features

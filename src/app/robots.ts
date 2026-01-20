@@ -4,7 +4,7 @@ import { SEO_CONFIG } from '@/lib/seo-config';
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'https://thai-muslim-education.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thaimuslimeducation.com';
 
     return {
         rules: {
