@@ -12,9 +12,9 @@ export const SEO_CONFIG = {
         en: process.env.NEXT_PUBLIC_WP_URL_EN || 'https://en.thaimuslimeducation.com',
     },
 
-    // Main site URL (deployed on Hostinger)
+    // Main site URL (deployed on Hostinger - blog subdomain)
     site: {
-        url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thaimuslimeducation.com',
+        url: process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.thaimuslimeducation.com',
     },
 
     // Control individual features
